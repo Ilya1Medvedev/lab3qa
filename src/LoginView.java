@@ -29,19 +29,22 @@ public class LoginView {
     public Button loginButton;
 
     private List<User> listOfUsers;
-    private BigDataManager bigDataManager;
+
+//    Metodas nudojamas kitoje klasėje kaip konstrukorius
 
     public void setData(List<User> listOfUsers) {
         this.listOfUsers = listOfUsers;
     }
+
+//    Metodas atidaro MainView puslapį
 
     public void goToMainView(ActionEvent actionEvent) throws IOException {
         List<User> currentUser;
         currentUser = listOfUsers.stream()
                 .filter((u -> u.getUsername()
                         .equals(loginField.getText()) && (u.getPassword().equals(passwordField.getText())))).collect(Collectors.toList());
-        if (currentUser.size() == 0) {
-            AllertBox.display("Klaida", "Duomenų bazėje nėra tokio vartotojo");
+        if (currentUser.isEmpty()) {
+            AllertBox.display("Error", ErrorMessages.NoUserInDatabase);
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
             Parent root = fxmlLoader.load();
@@ -55,6 +58,8 @@ public class LoginView {
             stage.show();
         }
     }
+
+//      Metodas įjungia registracijos formą
 
     public void goToSignUpView(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("sign-up-view.fxml"));

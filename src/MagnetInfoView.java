@@ -19,14 +19,12 @@ import java.util.List;
 
 public class MagnetInfoView {
 
-    public Text magnetInfo;
-    public Button backButton;
-    public ImageView regionImage;
-    public Text magnetShops;
+    private Text magnetInfo;
+    private ImageView regionImage;
+    private Text magnetShops;
     private Magnet magnet;
     private User user;
     private List<User> listOfUsers;
-    private List<Magnet> missingMagnets;
     private BigDataManager bigDataManager = new BigDataManager();
 
     public void setData(List<User> listOfUsers, User user, Magnet magnet) throws FileNotFoundException {
@@ -38,39 +36,38 @@ public class MagnetInfoView {
     }
 
     private void fillTables() throws FileNotFoundException {
-        String imgFolderPath = System.getProperty("user.dir") + "\\src\\main\\java\\com\\example\\surinklietuva\\Images";
         regionImage.setImage(null);
         Image img = null;
         switch (magnet.getArea()) {
             case "Vilniaus apskritis":
-                img = new Image(new FileInputStream(imgFolderPath + "\\Vilnius.png"));
+                img = new Image(new FileInputStream(Images.vilnius));
                 break;
             case "Kauno apskritis":
-                img = new Image(new FileInputStream(imgFolderPath + "\\Kaunas.png"));
+                img = new Image(new FileInputStream(Images.kaunas));
                 break;
             case "Klaipėdos apskritis":
-                img = new Image(new FileInputStream(imgFolderPath + "\\Klaipeda.png"));
+                img = new Image(new FileInputStream(Images.klaideda));
                 break;
             case "Šiaulių apskritis":
-                img = new Image(new FileInputStream(imgFolderPath + "\\Siauliai.png"));
+                img = new Image(new FileInputStream(Images.siauliai);
                 break;
             case "Telšių apskritis":
-                img = new Image(new FileInputStream(imgFolderPath + "\\Telsiai.png"));
+                img = new Image(new FileInputStream(Images.telsiai));
                 break;
             case "Marijampolės apskritis":
-                img = new Image(new FileInputStream(imgFolderPath + "\\Marijampole.png"));
+                img = new Image(new FileInputStream(Images.marijampole));
                 break;
             case "Tauragės apskritis":
-                img = new Image(new FileInputStream(imgFolderPath + "\\Taurage.png"));
+                img = new Image(new FileInputStream(Images.taurage));
                 break;
             case "Utenos apskritis":
-                img = new Image(new FileInputStream(imgFolderPath + "\\Utena.png"));
+                img = new Image(new FileInputStream(Images.utena));
                 break;
             case "Panevėžio apskritis":
-                img = new Image(new FileInputStream(imgFolderPath + "\\Panevezys.png"));
+                img = new Image(new FileInputStream(Images.panevezys));
                 break;
             case "Alytaus apskritis":
-                img = new Image(new FileInputStream(imgFolderPath + "\\Alytus.png"));
+                img = new Image(new FileInputStream(Images.alytus));
                 break;
             default:
                 int i = 0;
@@ -79,12 +76,12 @@ public class MagnetInfoView {
         magnetInfo.setText(magnet.getName() + " " + magnet.getArea());
         String shops = "";
         for (String s : magnet.getListOfShops()) {
-            shops += s + "\n";
+            shops.append(arrayOfStrings[s]);
         }
         magnetShops.setText(shops);
     }
 
-    public void returnToPrevious(ActionEvent actionEvent) throws IOException {
+    public void returnToPrevious() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
         Parent root = fxmlLoader.load();
         MainView mainView = fxmlLoader.getController();
